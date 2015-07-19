@@ -31,7 +31,7 @@ var urlList = function() {
       for (var i = 0; i < historyItems.length; ++i) {
         var url = historyItems[i].url;
         var actUrl = getLocation(url);
-        console.log(actUrl);
+        // console.log(actUrl);
         // console.log(actUrl.hostname);
         // console.log(actUrl.host);
 
@@ -78,16 +78,35 @@ var urlList = function() {
       return urlToCount[b] - urlToCount[a];
     });
 
+    console.log(urlArray);
+
     // buildPopupDom(divName, urlArray.slice(0, 10));
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable(urlArray);
+
+      var options = {
+        title: 'Website History'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+
+      chart.draw(data, options);
+    } 
   };
 
   var getLocation = function(href) {
     var l = document.createElement("a");
     l.href = href;
     return l;
-};
+  };
+
 
 }
+
+
 document.addEventListener('DOMContentLoaded', function () {
   urlList();
 });
