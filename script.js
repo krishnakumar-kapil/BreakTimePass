@@ -6,14 +6,21 @@ var urlList = function() {
   // To look for history items visited in the last week,
   // subtract a week of microseconds from the current time.
 
-  var dt = new Date();
-  var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
-  console.log(secs);
-  var startOfDay = dt - secs;
-  console.log(startOfDay);
-  var startOfDay = 1000 * 60 * 60 * 24 * 7;
+  // var dt = new Date();
+  // console.log(dt.getTime());
+  // var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
+  // console.log(secs);
+  // var startOfDay = dt - secs;
+  // console.log(startOfDay);
 
-  var oneDayAgo = (new Date).getTime() - 1000* 60* 60 * 24;
+
+  var currentTime = new Date();
+  var secsFromDayStart = currentTime.getSeconds() + 60 * currentTime.getMinutes() + 60*60* currentTime.getHours();
+  var startOfDay = currentTime - secsFromDayStart * 1000;
+
+  console.log("currentTime: "+currentTime);
+  console.log("secsFromDayStart: "+secsFromDayStart);
+  console.log("startOfDay: "+startOfDay);
   // var oneWeekAgo = (new Date).getTime() - microsecondsPerWeek;
 
   // Track the number of callbacks from chrome.history.getVisits()
@@ -22,7 +29,7 @@ var urlList = function() {
 
   chrome.history.search({
       'text': '',              // Return every history item....
-      'startTime': oneDayAgo,
+      'startTime': startOfDay,
       'maxResults': 10000  // that was accessed less than a day ago.
     },
     function(historyItems) {
@@ -51,6 +58,8 @@ var urlList = function() {
       // if (!numRequestsOutstanding) {
       //   onAllVisitsProcessed();
       // }
+
+      onAllVisitsProcessed();
     });
 
   function addToMap(url){
@@ -68,33 +77,35 @@ var urlList = function() {
   // This function is called when we have the final list of URls to display.
   var onAllVisitsProcessed = function() {
     // Get the top scorring urls.
+
     urlArray = [];
     for (var url in urlToCount) {
       urlArray.push(url);
     }
-
+    console.log(urlArray);
+    // urlArray.splice(0,10);
     // Sort the URLs by the number of times the user typed them.
-    urlArray.sort(function(a, b) {
+    urlArray.splice(0,10).sort(function(a, b) {
       return urlToCount[b] - urlToCount[a];
     });
 
     console.log(urlArray);
 
     // buildPopupDom(divName, urlArray.slice(0, 10));
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(drawChart);
-    function drawChart() {
+    // google.load("visualization", "1", {packages:["corechart"]});
+    // google.setOnLoadCallback(drawChart);
+    // function drawChart() {
 
-      var data = google.visualization.arrayToDataTable(urlArray);
+    //   var data = google.visualization.arrayToDataTable(urlArray);
+    //   console.log(data);
+    //   var options = {
+    //     title: 'Website History'
+    //   };
 
-      var options = {
-        title: 'Website History'
-      };
+    //   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
 
-      var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-
-      chart.draw(data, options);
-    } 
+    //   chart.draw(data, options);
+    // } 
   };
 
   var getLocation = function(href) {
