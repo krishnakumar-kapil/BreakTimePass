@@ -69,24 +69,20 @@ var urlList = function() {
     urlCount[url]++;
   }
 
-
-  // Maps URLs to a count of the number of times the user typed that URL into
-  // the omnibox.
-  var urlToCount = {};
-
   // This function is called when we have the final list of URls to display.
   var onAllVisitsProcessed = function() {
     // Get the top scorring urls.
 
     urlArray = [];
-    for (var url in urlToCount) {
-      urlArray.push(url);
+    for (var url in urlCount) {
+      console.log(url +" urlVal: "+urlCount[url]);
+      urlArray.push(url);s
     }
     console.log(urlArray);
     // urlArray.splice(0,10);
     // Sort the URLs by the number of times the user typed them.
-    urlArray.splice(0,10).sort(function(a, b) {
-      return urlToCount[b] - urlToCount[a];
+    urlArray.sort(function(a, b) {
+      return urlArray[b] - urlArray[a];
     });
 
     console.log(urlArray);
