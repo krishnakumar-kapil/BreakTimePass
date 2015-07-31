@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Reads your history, and shows various statistics for your history for the day.",
   "permissions": [
-    "history"
+    "history", "storage","tabs"
   ],
   "browser_action": {
     "default_popup": "index.html"
