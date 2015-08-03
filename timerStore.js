@@ -1,6 +1,6 @@
 // var storage = chrome.storage.local; 
 var startTime = new Date();
-
+var currentTab = "";
 // var currentTab = function(){
 //     // chrome.tabs.getSelected(null, function(tab) {
 //     //     tab = tab.id;
@@ -20,11 +20,15 @@ var startTime = new Date();
 
 function getCurrentTab(){
   chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-      var currentTab = tabs[0].url;
-      console.log(currentTab);
-      var hostName = getHostName(currentTab);
-      console.log(hostName);
-      return hostName;
+      var currentTab = tabs[0];
+      if(currantTab !== undefined){
+        var currentUrl = tabs[0].url;
+        console.log(currentUrl);
+        var tag = getHostName(currentUrl);
+        console.log(tag);
+        return tag;
+      }      
+      return "";
   });
 }
 
@@ -32,7 +36,7 @@ function getHostName(href){
       if(href !== undefined){
         var l = document.createElement("a");
         l.href = href;
-        console.log(l);
+        // console.log(l);
         console.log(l.hostname);
         return l;
       }else
@@ -41,6 +45,7 @@ function getHostName(href){
 
 
   function saveChanges(hostName) {
+    console.log(hostName);
     if(hostName !== undefined){
       var currentTime = new Date();
       var timeVal = currentTime - startTime;
@@ -48,6 +53,7 @@ function getHostName(href){
         console.log(result + " : "+ result[hostName]);
         var store = {};
         store[hostName] = timeVal;
+        console.log(store);
         if(!result[hostName]){
           chrome.storage.local.set(store);
         } else {
@@ -60,6 +66,7 @@ function getHostName(href){
       chrome.storage.local.get(hostName, function(result){
         console.log(result);
       });
+      console.log(chrome.storage.local);
    }
    else
     console.log("undefin hr");
@@ -83,10 +90,19 @@ function getHostName(href){
      // });
    }
 
-   chrome.tabs.onActivated.addListener(function(){
-      console.log(getCurrentTab());
-      // console.log(altGetCurrentTab());
-      saveChanges(getCurrentTab());
+
+   //EVENT
+   chrome.tabs.onUpdated.addListener(function(url){
+    if(currentTab !== ""){
+      saveChanges(currentTab);
       startTime = new Date();
+      currentTab = getCurrentTab();
+    }else{
+      console.log("empty current tab");
+      // saveChanges("");
+      startTime = new Date();
+      currentTab = getCurrentTab();
+    }
    });
+
 
