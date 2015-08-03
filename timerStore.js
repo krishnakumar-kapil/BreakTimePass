@@ -1,38 +1,85 @@
 // var storage = chrome.storage.local; 
 var startTime = new Date();
 
-var currentTab = function(){
-    chrome.tabs.getSelected(null, function(tab) {
-        tab = tab.id;
-        tabUrl = tab.url;
+// var currentTab = function(){
+//     // chrome.tabs.getSelected(null, function(tab) {
+//     //     tab = tab.id;
+//     //     tabUrl = tab.url;
+//     //     console.log("taburl: "+tabUrl);
+//     //     var hostName = getHostName(tabUrl);
+//     //     return hostName;
+//     // });
 
-        var hostName = getHostName(tabUrl);
-        return hostName;
-    });
-};
+//   chrome.tabs.getCurrent(function(tab){
+//           console.log(tab.url);
+//           return tab.url.hostname;
+//       }
+//   );
+
+// };
+
+function getCurrentTab(){
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+      var currentTab = tabs[0].url;
+      console.log(currentTab);
+      var hostName = getHostName(currentTab);
+      console.log(hostName);
+      return hostName;
+  });
+}
+
+// function getCurrentTab(){
+//     chrome.tabs.getCurrent(function(tab){
+//           console.log(tab.url);
+//           return tab.url.hostname;
+//       }
+//   );
+// }
+
+function getHostName(href){
+    var l = document.createElement("a");
+    l.href = href;
+    console.log(l);
+    console.log(l.hostname);
+    return l;
+}
 
   var getHostName = function(href) {
-    var l = document.createElement("a");
-    return l;
+      if(!href){
+        var l = document.createElement("a");
+        l.href = href;
+        console.log(l);
+        console.log(l.hostname);
+        return l;
+      }else
+        return "";
   };
 
-  function saveChanges(lin) {
-    var hostName = lin.href;
-    var currentTime = new Date();
-    var timeVal = currentTime - startTime;
-    chrome.storage.local.get(hostName, function(result){
-      console.log(result + " : "+ result[hostName]);
-      var store = {};
-      store[hostName] = timeVal;
-      if(!result[hostName]){
-        chrome.storage.local.set(store);
-      } else {
-        store[hostName] = result[hostName] + timeVal;
-        chrome.storage.local.set(store);
-      }
-    });
+  function saveChanges(hr) {
+    if(!hr){
+      console.log(hr);
+      var hostName = hr.hostname;
+      var currentTime = new Date();
+      var timeVal = currentTime - startTime;
+      chrome.storage.local.get(hostName, function(result){
+        console.log(result + " : "+ result[hostName]);
+        var store = {};
+        store[hostName] = timeVal;
+        if(!result[hostName]){
+          chrome.storage.local.set(store);
+        } else {
+          store[hostName] = result[hostName] + timeVal;
+          chrome.storage.local.set(store);
+        }
+      });
 
-    console.log(hostName + ": "+chrome.storage.local);
+      console.log(hostName + ": "+chrome.storage.local);
+      chrome.storage.local.get(hostName, function(result){
+        console.log(result);
+      });
+   }
+   else
+    console.log("undefin hr");
 
     // if(!storage.get(hostName)){
     //   storage.set({hostName: timeVal}, function() {
@@ -54,7 +101,9 @@ var currentTab = function(){
    }
 
    chrome.tabs.onActivated.addListener(function(){
-      saveChanges(currentTab());
+      console.log(getCurrentTab());
+      // console.log(altGetCurrentTab());
+      saveChanges(getCurrentTab());
       startTime = new Date();
    });
 
