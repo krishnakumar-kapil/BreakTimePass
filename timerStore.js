@@ -28,24 +28,8 @@ function getCurrentTab(){
   });
 }
 
-// function getCurrentTab(){
-//     chrome.tabs.getCurrent(function(tab){
-//           console.log(tab.url);
-//           return tab.url.hostname;
-//       }
-//   );
-// }
-
 function getHostName(href){
-    var l = document.createElement("a");
-    l.href = href;
-    console.log(l);
-    console.log(l.hostname);
-    return l;
-}
-
-  var getHostName = function(href) {
-      if(!href){
+      if(href !== undefined){
         var l = document.createElement("a");
         l.href = href;
         console.log(l);
@@ -53,12 +37,11 @@ function getHostName(href){
         return l;
       }else
         return "";
-  };
+}
 
-  function saveChanges(hr) {
-    if(!hr){
-      console.log(hr);
-      var hostName = hr.hostname;
+
+  function saveChanges(hostName) {
+    if(hostName !== undefined){
       var currentTime = new Date();
       var timeVal = currentTime - startTime;
       chrome.storage.local.get(hostName, function(result){
