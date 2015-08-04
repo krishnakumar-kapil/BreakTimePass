@@ -1,7 +1,7 @@
 // var storage = chrome.storage.local; 
 var startTime = new Date();
 var currentTab;
-var currentDay = (new Date()).getDate();
+var expireDate = (new Date()).getDate() + 1;
 // var currentTab = function(){
 //     // chrome.tabs.getSelected(null, function(tab) {
 //     //     tab = tab.id;
@@ -52,9 +52,12 @@ function getHostName(href){
         var store = {};
         store[hostName] = timeVal;
         console.log("store obj" + store);
+        console.log("result[hostname]: "+result[hostName]);
         if(!result[hostName]){
+          console.log("hostname dne");
           chrome.storage.local.set(store);
         } else {
+          console.log("hostname exists");
           store[hostName] = result[hostName] + timeVal;
           chrome.storage.local.set(store);
         }
@@ -62,7 +65,7 @@ function getHostName(href){
 
       console.log("after putting in");
       console.log(hostName + ": "+chrome.storage.local);
-      chrome.storage.local.get(hostName, function(result){
+      chrome.storage.local.get(null, function(result){
         console.log(result);
       });
       console.log(chrome.storage.local);
@@ -92,17 +95,22 @@ function getHostName(href){
 
    //EVENT
   function changeUrlCall(url){
+    // chrome.storage.local.clear();
+
     console.log("callback url"+url);
 
-    console.log(currentDay +" curr + start: "+startTime.getDate());
-    if(currentDay !== startTime.getDate()){
+    console.log(expireDate +" expire + start: "+startTime.getDate());
+    if(expireDate == (new Date()).getDate()){
       console.log("storage");
       chrome.local.storage.clear();
-      currentDay = (new Date()).getDate();
+      expireDate = (new Date()).getDate() + 1;
+      console.log(expireDate);
     }
 
     var date = new Date();
     console.log("currentDate: "+ date);
+
+    console.log("currentTab: "+currentTab);
     if(currentTab !== ""){
       saveChanges(currentTab);
     }else{
@@ -111,7 +119,7 @@ function getHostName(href){
     }
 
     startTime = new Date();
-    currentTab = url;
+    currentTab = getHostName(url);
 
     chrome.storage.local.getBytesInUse(function(bytesInUse){
       console.log("bytes: "+bytesInUse);
