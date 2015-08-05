@@ -27,41 +27,11 @@ function loadArray(){
       }
       html+='</ol>'
       document.getElementById('urlList').innerHTML+= html;
-      loadDataChartChartist();
-      // loadDataChartGoogle();
+      loadDataChart();
     });
 }
 
-function loadChartGoogle(){
-  // google.load("visualization", "1", {packages:["corechart"]});
-  // google.setOnLoadCallback(function(){
-
-  //     var storage = chrome.storage.local.get(null, function(result){
-  //       var dataAr = [];
-  //       for(var url in result){
-  //         if(url !== "expireDate"){
-  //           var urlAr = [url, result[url]];
-  //           dataAr.push(urlAr);
-  //         }
-  //       }
-  //       var data = google.visualization.arrayToDataTable(dataAr);
-
-  //       var options = {
-  //         title: 'Url Time Dist'
-  //       };
-  //       var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-  //        chart.draw(data, options); 
-  //     });
-
-         
-  // });
-
-
-}
-
-
-
-function loadDataChartChartist(){
+function loadDataChart(){
   chrome.storage.local.get(null,function(result){
       var keys = Object.keys(result);
       console.log(keys);
@@ -82,8 +52,8 @@ function loadDataChartChartist(){
       };
 
       var responsiveOptions = [
-        ['screen', {
-          chartPadding: 1000,
+        ['screen and (min-width: 640px)', {
+          chartPadding: 20,
           labelOffset: 50,
           labelDirection: 'explode',
           labelInterpolationFnc: function(value) {
