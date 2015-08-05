@@ -1,7 +1,5 @@
-// var storage = chrome.storage.local; 
-var startTime = new Date();
 var currentTab;
-var expireDate = (new Date()).getDate() + 1;
+// var storage = chrome.storage.local;
 // var currentTab = function(){
 //     // chrome.tabs.getSelected(null, function(tab) {
 //     //     tab = tab.id;
@@ -47,21 +45,38 @@ function getHostName(href){
     if(hostName !== undefined){
       var currentTime = new Date();
       var timeVal = currentTime - startTime;
-      chrome.storage.local.get(hostName, function(result){
-        console.log("result: "+result + " : value: "+ result[hostName]);
-        var store = {};
-        store[hostName] = timeVal;
-        console.log("store obj" + store);
-        console.log("result[hostname]: "+result[hostName]);
-        if(!result[hostName]){
-          console.log("hostname dne");
-          chrome.storage.local.set(store);
+
+      chrome.storage.local.get("urlList", function(urlList){
+        console.log("urlList");
+        console.log(urlList);
+        if(!urlList){
+          console.log("url list dne");
+          var urlListStore = {};
+          urlListStore[hostName] = timeVal;
+          chrome.storage.local.set({"urlList": urlListStore});
         } else {
-          console.log("hostname exists");
-          store[hostName] = result[hostName] + timeVal;
-          chrome.storage.local.set(store);
+          console.log("url list exists");
+          if(!urlList[hostName]) urlList[hostName] = timeVal;
+          else urlList[hostName] += timeVal;
+
+          chrome.storage.local.set(urlList);
         }
       });
+      // chrome.storage.local.get(hostName, function(result){
+      //   console.log("result: "+result + " : value: "+ result[hostName]);
+      //   var store = {};
+      //   store[hostName] = timeVal;
+      //   console.log("store obj" + store);
+      //   console.log("result[hostname]: "+result[hostName]);
+      //   if(!result[hostName]){
+      //     console.log("hostname dne");
+      //     chrome.storage.local.set(store);
+      //   } else {
+      //     console.log("hostname exists");
+      //     store[hostName] = result[hostName] + timeVal;
+      //     chrome.storage.local.set(store);
+      //   }
+      // });
 
       console.log("after putting in");
       console.log(hostName + ": "+chrome.storage.local);
@@ -72,40 +87,37 @@ function getHostName(href){
    }
    else
     console.log("undefin hr");
-
-    // if(!storage.get(hostName)){
-    //   storage.set({hostName: timeVal}, function() {
-    //     // Notify that we saved.
-    //     console.log(hostName+' added');
-    //   });
-    // } else {
-    //   var time = storage.get(hostName);
-    //   storage.set({hostName: time + timeVal}, function(){
-    //     console.log('stored new time');
-    //   })
-    // }
-
-     // // Save it using the Chrome extension storage API.
-     // chrome.storage.sync.set({'value': theValue}, function() {
-     //   // Notify that we saved.
-     //   console.log('Settings saved');
-     // });
    }
 
+   function checkExpireDate(){
+    chrome.storage.local.get(null, function(result){
+      var expireDate = result["expireDate"];
+      console.log("expireDate");
+      console.log(expireDate);
+      var expireDateNew = {"expireDate": (new Date()).getDate() + 1};
+      console.log(expireDateNew);
+      if(expireDate == undefined){
+        chrome.storage.local.set(expireDateNew);
+      } else {
+        if(expireDate == (new Date()).getDate()){
+          chrome.storage.local.clear();
+          chrome.storage.local.set(expireDateNew);
+        }
+      }
+    });
+
+    chrome.storage.local.get(null, function(result){
+      console.log(result);
+    });
+   }
 
    //EVENT
   function changeUrlCall(url){
     // chrome.storage.local.clear();
+    checkExpireDate();
 
     console.log("callback url"+url);
 
-    console.log(expireDate +" expire + start: "+startTime.getDate());
-    if(expireDate == (new Date()).getDate()){
-      console.log("storage");
-      chrome.local.storage.clear();
-      expireDate = (new Date()).getDate() + 1;
-      console.log(expireDate);
-    }
 
     var date = new Date();
     console.log("currentDate: "+ date);

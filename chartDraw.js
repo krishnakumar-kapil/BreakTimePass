@@ -38,17 +38,22 @@ function loadArray(){
       console.log(result);
 
       for (var url in result){
-        console.log(url);
-        sortable.push([url, result[url]])
+        if(url !== "expireDate"){
+          console.log(url);
+          sortable.push([url, result[url]]);
+        }
       }
       sortable.sort(function(a, b) {return b[1] - a[1]});
 
       console.log(sortable);
 
       var html='<ol>';
-      for (var i=0; i<=10; i++) {
+      var max = 10 < sortable.length? 10: sortable.length;
+      console.log(max);
+      for (var i=0; i< max; i++) {
           console.log(sortable[i]);
-          html+='<li>'+sortable[i]+'</li>';
+          console.log(sortable[i][0]);
+          html+='<li>'+(sortable[i])[0]+ ": "+convertMiliSecHours((sortable[i])[1])+'</li>';
       }
       html+='</ol>'
       document.getElementById('urlList').innerHTML+= html;
@@ -67,8 +72,15 @@ function loadArray(){
     // urlArray.sort(function(a, b) {
     //   return b.value - a.value;
     // });
+}
 
-
+function convertMiliSecHours(d){
+  d = Number(d);
+  d = d / 1000;
+  var h = Math.floor(d / 3600);
+  var m = Math.floor(d % 3600 / 60);
+  var s = Math.floor(d % 3600 % 60);
+  return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
 }
 
 function display(urlArray){
