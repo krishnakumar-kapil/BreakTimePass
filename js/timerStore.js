@@ -18,31 +18,34 @@ function getHostName(href){
       console.log("hostname save:"+hostName+ " next is NOT_INCLUDE_HOST");
       console.log(NOT_INCLUDE_HOST[hostName]);
 
-      if(hostName !== undefined && NOT_INCLUDE_HOST[hostName] !== 0){
-        var currentTime = new Date();
-        var timeVal = Math.round((currentTime - startTime)/1000);
+      var currentTime = new Date();
+      var timeVal = Math.round((currentTime - startTime)/1000);
+      if(hostName !== undefined && NOT_INCLUDE_HOST[hostName] !== 0 && timeVal > 0){
+        
+        console.log("timeVal: "+timeVal);
+          chrome.storage.local.get(null, function(urlList){
+            console.log("urlList");
+            console.log(urlList);
+            console.log("BEFORE storage: "+urlList[hostName]);
+            if(urlList == undefined){
+              console.log("url list dne");
+              var urlListStore = {};
+              urlListStore[hostName] = timeVal;
+              chrome.storage.local.set({"urlList": urlListStore});
+            } else {
+              console.log("url list exists");
+              if(urlList[hostName] == undefined) urlList[hostName] = timeVal;
+              else urlList[hostName] = urlList[hostName] + timeVal;
 
-          chrome.storage.local.get("urlList", function(urlList){
-          console.log("urlList");
-          console.log(urlList);
-          if(!urlList){
-            console.log("url list dne");
-            var urlListStore = {};
-            urlListStore[hostName] = timeVal;
-            chrome.storage.local.set({"urlList": urlListStore});
-          } else {
-            console.log("url list exists");
-            if(!urlList[hostName]) urlList[hostName] = timeVal;
-            else urlList[hostName] = urlList[hostName] + timeVal;
-
-            chrome.storage.local.set(urlList);
-          }
+              chrome.storage.local.set(urlList);
+            }
         });
 
         console.log("after putting in");
-        console.log(hostName + ": "+chrome.storage.local);
+        // console.log(hostName + ": "+chrome.storage.local);
         chrome.storage.local.get(null, function(result){
           console.log(result);
+          console.log("AFTER storage: "+result[hostName]);
         });
         console.log(chrome.storage.local);
      }
@@ -61,6 +64,7 @@ function getHostName(href){
         chrome.storage.local.set(expireDateNew);
       } else {
         if(expireDate == (new Date()).getDate()){
+          console.log("*************CLEARING STORAGE*********");
           chrome.storage.local.clear();
           chrome.storage.local.set(expireDateNew);
         }
