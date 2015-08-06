@@ -1,6 +1,6 @@
 var currentTab;
 var startTime;
-
+const NOT_INCLUDE_HOST = {"extensions":0, "devtools":0, "newtab":0};
 
 function getHostName(href){
       if(href !== undefined){
@@ -15,12 +15,14 @@ function getHostName(href){
 
 
   function saveChanges(hostName) {
-      console.log("hostname save:" +hostName);
-      if(hostName !== undefined){
-        var currentTime = new Date();
-        var timeVal = currentTime - startTime;
+      console.log("hostname save:"+hostName+ " next is NOT_INCLUDE_HOST");
+      console.log(NOT_INCLUDE_HOST[hostName]);
 
-        chrome.storage.local.get("urlList", function(urlList){
+      if(hostName !== undefined && NOT_INCLUDE_HOST[hostName] !== 0){
+        var currentTime = new Date();
+        var timeVal = Math.round((currentTime - startTime)/1000);
+
+          chrome.storage.local.get("urlList", function(urlList){
           console.log("urlList");
           console.log(urlList);
           if(!urlList){

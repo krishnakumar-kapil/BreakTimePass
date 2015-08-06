@@ -76,7 +76,7 @@ function loadDataChart(urlArray, max){
 
 function convertMiliSecHours(d){
   d = Number(d);
-  d = d / 1000;
+
   var h = Math.floor(d / 3600);
   var m = Math.floor(d % 3600 / 60);
   var s = Math.floor(d % 3600 % 60);
