@@ -1,32 +1,6 @@
 var currentTab;
-// var storage = chrome.storage.local;
-// var currentTab = function(){
-//     // chrome.tabs.getSelected(null, function(tab) {
-//     //     tab = tab.id;
-//     //     tabUrl = tab.url;
-//     //     console.log("taburl: "+tabUrl);
-//     //     var hostName = getHostName(tabUrl);
-//     //     return hostName;
-//     // });
+var startTime;
 
-//   chrome.tabs.getCurrent(function(tab){
-//           console.log(tab.url);
-//           return tab.url.hostname;
-//       }
-//   );
-
-// };
-
-function getCurrentTab(){
-  var tabUrl = "";
-  chrome.tabs.getCurrent(function(tab){
-          if(tab !== undefined){
-            tabUrl = tab.url;
-            console.log("tab url:"+ tab.url);
-          }
-  });
-  return getHostName(tabUrl);
-}
 
 function getHostName(href){
       if(href !== undefined){
@@ -57,26 +31,11 @@ function getHostName(href){
         } else {
           console.log("url list exists");
           if(!urlList[hostName]) urlList[hostName] = timeVal;
-          else urlList[hostName] += timeVal;
+          else urlList[hostName] = urlList[hostName] + timeVal;
 
           chrome.storage.local.set(urlList);
         }
       });
-      // chrome.storage.local.get(hostName, function(result){
-      //   console.log("result: "+result + " : value: "+ result[hostName]);
-      //   var store = {};
-      //   store[hostName] = timeVal;
-      //   console.log("store obj" + store);
-      //   console.log("result[hostname]: "+result[hostName]);
-      //   if(!result[hostName]){
-      //     console.log("hostname dne");
-      //     chrome.storage.local.set(store);
-      //   } else {
-      //     console.log("hostname exists");
-      //     store[hostName] = result[hostName] + timeVal;
-      //     chrome.storage.local.set(store);
-      //   }
-      // });
 
       console.log("after putting in");
       console.log(hostName + ": "+chrome.storage.local);
@@ -86,7 +45,7 @@ function getHostName(href){
       console.log(chrome.storage.local);
    }
    else
-    console.log("undefin hr");
+    console.log("undefin hn");
    }
 
    function checkExpireDate(){

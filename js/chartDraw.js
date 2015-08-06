@@ -27,18 +27,25 @@ function loadArray(){
       }
       html+='</ol>'
       document.getElementById('urlList').innerHTML+= html;
-      loadDataChart();
+      loadDataChart(sortable, max);
     });
 }
 
-function loadDataChart(){
+function loadDataChart(urlArray, max){
   chrome.storage.local.get(null,function(result){
-      var keys = Object.keys(result);
-      console.log(keys);
+      var keys = [];
       var vals = [];
-      for(var url in result){
-        vals.push(result[url]);
+      for(var i = 0; i < max; i++){
+        keys.push((urlArray[i])[0]);
+        vals.push((urlArray[i])[1]);
       }
+
+      // var keys = Object.keys(result);
+      // console.log(keys);
+      // var vals = [];
+      // for(var url in result){
+      //   vals.push(result[url]);
+      // }
 
       var data = {
         labels: keys,
@@ -54,7 +61,7 @@ function loadDataChart(){
       var responsiveOptions = [
         ['screen and (min-width: 640px)', {
           chartPadding: 20,
-          labelOffset: 50,
+          labelOffset: 140,
           labelDirection: 'explode',
           labelInterpolationFnc: function(value) {
             return value;
