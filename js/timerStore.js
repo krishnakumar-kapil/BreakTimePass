@@ -15,37 +15,37 @@ function getHostName(href){
 
 
   function saveChanges(hostName) {
-    console.log("hostname save:" +hostName);
-    if(hostName !== undefined){
-      var currentTime = new Date();
-      var timeVal = currentTime - startTime;
+      console.log("hostname save:" +hostName);
+      if(hostName !== undefined){
+        var currentTime = new Date();
+        var timeVal = currentTime - startTime;
 
-      chrome.storage.local.get("urlList", function(urlList){
-        console.log("urlList");
-        console.log(urlList);
-        if(!urlList){
-          console.log("url list dne");
-          var urlListStore = {};
-          urlListStore[hostName] = timeVal;
-          chrome.storage.local.set({"urlList": urlListStore});
-        } else {
-          console.log("url list exists");
-          if(!urlList[hostName]) urlList[hostName] = timeVal;
-          else urlList[hostName] = urlList[hostName] + timeVal;
+        chrome.storage.local.get("urlList", function(urlList){
+          console.log("urlList");
+          console.log(urlList);
+          if(!urlList){
+            console.log("url list dne");
+            var urlListStore = {};
+            urlListStore[hostName] = timeVal;
+            chrome.storage.local.set({"urlList": urlListStore});
+          } else {
+            console.log("url list exists");
+            if(!urlList[hostName]) urlList[hostName] = timeVal;
+            else urlList[hostName] = urlList[hostName] + timeVal;
 
-          chrome.storage.local.set(urlList);
-        }
-      });
+            chrome.storage.local.set(urlList);
+          }
+        });
 
-      console.log("after putting in");
-      console.log(hostName + ": "+chrome.storage.local);
-      chrome.storage.local.get(null, function(result){
-        console.log(result);
-      });
-      console.log(chrome.storage.local);
-   }
-   else
-    console.log("undefin hn");
+        console.log("after putting in");
+        console.log(hostName + ": "+chrome.storage.local);
+        chrome.storage.local.get(null, function(result){
+          console.log(result);
+        });
+        console.log(chrome.storage.local);
+     }
+     else
+      console.log("undefin hn");
    }
 
    function checkExpireDate(){

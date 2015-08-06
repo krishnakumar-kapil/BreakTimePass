@@ -43,21 +43,8 @@ var urlList = function() {
         // console.log(actUrl.host);
 
         addToMap(actUrl.hostname);
-
-        // var processVisitsWithUrl = function(url) {
-        //   // We need the url of the visited item to process the visit.
-        //   // Use a closure to bind the  url into the callback's args.
-        //   return function(visitItems) {
-        //     processVisits(url, visitItems);
-        //   };
-        // };
-        // chrome.history.getVisits({url: url}, processVisitsWithUrl(url));
-        // numRequestsOutstanding++;
       }
-      console.log(urlCount);
-      // if (!numRequestsOutstanding) {
-      //   onAllVisitsProcessed();
-      // }
+      // console.log(urlCount);
 
       onAllVisitsProcessed();
     });
@@ -75,34 +62,29 @@ var urlList = function() {
 
     urlArray = [];
     for (var url in urlCount) {
-      console.log(url +" urlVal: "+urlCount[url]);
-      urlArray.push(url);s
+      // console.log(url +" urlVal: "+urlCount[url]);
+      urlArray.push(url);
     }
     console.log(urlArray);
     // urlArray.splice(0,10);
     // Sort the URLs by the number of times the user typed them.
     urlArray.sort(function(a, b) {
-      return urlArray[b] - urlArray[a];
+      return urlCount[b] - urlCount[a];
     });
-
+    console.log("urlArray");
     console.log(urlArray);
-
-    // buildPopupDom(divName, urlArray.slice(0, 10));
-    // google.load("visualization", "1", {packages:["corechart"]});
-    // google.setOnLoadCallback(drawChart);
-    // function drawChart() {
-
-    //   var data = google.visualization.arrayToDataTable(urlArray);
-    //   console.log(data);
-    //   var options = {
-    //     title: 'Website History'
-    //   };
-
-    //   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-
-    //   chart.draw(data, options);
-    // } 
+    display(urlArray);
   };
+
+  function display(urlArray){
+    var html='<ol>';
+    for (var i=0; i<=10; i++) {
+        // console.log(urlArray[i]);
+        html+='<li>'+urlArray[i]+' : '+urlCount[urlArray[i]]+'</li>';
+    }
+    html+='</ol>'
+    document.getElementById('historyCount').innerHTML+= html;
+  }
 
   var getLocation = function(href) {
     var l = document.createElement("a");
@@ -112,7 +94,6 @@ var urlList = function() {
 
 
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
   urlList();

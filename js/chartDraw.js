@@ -40,13 +40,6 @@ function loadDataChart(urlArray, max){
         vals.push((urlArray[i])[1]);
       }
 
-      // var keys = Object.keys(result);
-      // console.log(keys);
-      // var vals = [];
-      // for(var url in result){
-      //   vals.push(result[url]);
-      // }
-
       var data = {
         labels: keys,
         series: vals

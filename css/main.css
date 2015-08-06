@@ -1,9 +1,13 @@
 body{
 	width: 75em;
-	height: 50em;
+	height: 20em;
 }
 
 .ct-label{
 	line-height: 3;
 	font-size: 1.25em;
+}
+
+h1 {
+	text-align: center;
 }
