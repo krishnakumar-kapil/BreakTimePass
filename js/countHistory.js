@@ -78,7 +78,8 @@ var urlList = function() {
 
   function display(urlArray){
     var html='<ol>';
-    for (var i=0; i<=10; i++) {
+    var max = 10 < sortable.length? 10: sortable.length;
+    for (var i=0; i< max; i++) {
         // console.log(urlArray[i]);
         html+='<li>'+urlArray[i]+' : '+urlCount[urlArray[i]]+'</li>';
     }
