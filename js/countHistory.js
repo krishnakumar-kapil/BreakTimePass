@@ -1,46 +1,40 @@
+//Constants
+const maxHistoryResults = 10000;
+const displayMax = 10;
 
-//Search this days history to find majority of the url's that a user has typed in.
+document.addEventListener('DOMContentLoaded', function () {
+  urlList();
+});
+
+//Search this days history to find the number of times a user has accessed a host.
 var urlList = function() {
+
+  //Storage var for final result.
   var urlCount = {};
-
-  // To look for history items visited in the last week,
-  // subtract a week of microseconds from the current time.
-
-  // var dt = new Date();
-  // console.log(dt.getTime());
-  // var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
-  // console.log(secs);
-  // var startOfDay = dt - secs;
-  // console.log(startOfDay);
-
 
   var currentTime = new Date();
   var secsFromDayStart = currentTime.getSeconds() + 60 * currentTime.getMinutes() + 60*60* currentTime.getHours();
+  //Seconds from the start of day to calculate history from then.
   var startOfDay = currentTime - secsFromDayStart * 1000;
 
-  console.log("currentTime: "+currentTime);
-  console.log("secsFromDayStart: "+secsFromDayStart);
-  console.log("startOfDay: "+startOfDay);
-  // var oneWeekAgo = (new Date).getTime() - microsecondsPerWeek;
+  // console.log("currentTime: "+currentTime);
+  // console.log("secsFromDayStart: "+secsFromDayStart);
+  // console.log("startOfDay: "+startOfDay);
 
-  // Track the number of callbacks from chrome.history.getVisits()
-  // that we expect to get.  When it reaches zero, we have all results.
-  var numRequestsOutstanding = 0;
 
+  //Chrome api to retrieval results from history
   chrome.history.search({
       'text': '',              // Return every history item....
       'startTime': startOfDay,
-      'maxResults': 10000  // that was accessed less than a day ago.
+      'maxResults': maxHistoryResults  // that was accessed less than a day ago.
     },
     function(historyItems) {
+
       // For each history item, get details on all visits.
-      console.log(historyItems);
       for (var i = 0; i < historyItems.length; ++i) {
         var url = historyItems[i].url;
-        var actUrl = getLocation(url);
+        var actUrl = getHost(url);
         // console.log(actUrl);
-        // console.log(actUrl.hostname);
-        // console.log(actUrl.host);
 
         addToMap(actUrl.hostname);
       }
@@ -49,6 +43,7 @@ var urlList = function() {
       onAllVisitsProcessed();
     });
 
+  //Add to the map the passed in variable.
   function addToMap(url){
     if(!urlCount[url])
       urlCount[url] = 0;
@@ -62,7 +57,6 @@ var urlList = function() {
 
     urlArray = [];
     for (var url in urlCount) {
-      // console.log(url +" urlVal: "+urlCount[url]);
       urlArray.push(url);
     }
     console.log(urlArray);
@@ -78,16 +72,19 @@ var urlList = function() {
 
   function display(urlArray){
     var html='<ol>';
-    var max = 10 < urlArray.length? 10: urlArray.length;
+    var max = displayMax < urlArray.length? displayMax: urlArray.length;
     for (var i=0; i< max; i++) {
         // console.log(urlArray[i]);
         html+='<li>'+urlArray[i]+' : '+urlCount[urlArray[i]]+'</li>';
     }
     html+='</ol>'
+    //Add to html.
     document.getElementById('historyCount').innerHTML+= html;
   }
 
-  var getLocation = function(href) {
+
+  //Get the hostname from a given href
+  function getHost(href) {
     var l = document.createElement("a");
     l.href = href;
     return l;
@@ -95,7 +92,3 @@ var urlList = function() {
 
 
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-  urlList();
-});
