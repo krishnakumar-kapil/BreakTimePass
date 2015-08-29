@@ -1,36 +1,54 @@
+//Constants
+const expireDateVar = "expireDate";
+const displayCount = 10;
+
 document.addEventListener('DOMContentLoaded', function () {
+  //load array to load in sorted data stored in storage api.
   loadArray();
 });
 
+//Update when something changes in storage as well
+chrome.storage.onChanged.addListener(function(){
+  // loadDataChart();
+  loadArray();
+});
+
+
+//Function that orders the top hosts that you visited in the previous day to display later.
 function loadArray(){
+
+    //Final storage array.
     var sortable = [];
+    //Retrieve all the data from storage.
     var storage = chrome.storage.local.get(null, function(result){
-      console.log(result);
+
 
       for (var url in result){
-        if(url !== "expireDate"){
-          // console.log(url);
+        if(url !== expireDateVar){
+          //Add to array
           sortable.push([url, result[url]]);
         }
       }
+      //Sort function based on time in each.
       sortable.sort(function(a, b) {return b[1] - a[1]});
 
       console.log(sortable);
 
+      //Print to html.
       var html='<ol>';
-      var max = 10 < sortable.length? 10: sortable.length;
-      console.log(max);
+      var max = displayCount < sortable.length? displayCount: sortable.length;
       for (var i=0; i< max; i++) {
-          // console.log(sortable[i]);
-          // console.log(sortable[i][0]);
-          html+='<li>'+(sortable[i])[0]+ ": "+convertMiliSecHours((sortable[i])[1])+'</li>';
+          html+='<li>'+(sortable[i])[0]+ ": "+convertSecHours((sortable[i])[1])+'</li>';
       }
       html+='</ol>'
+      //Add to urlList
       document.getElementById('urlList').innerHTML+= html;
+      //Load chart based on data
       loadDataChart(sortable, max);
     });
 }
 
+//Load the data in based on ChartistJS Api.
 function loadDataChart(urlArray, max){
   chrome.storage.local.get(null,function(result){
       var keys = [];
@@ -72,9 +90,8 @@ function loadDataChart(urlArray, max){
   
 }
 
-
-
-function convertMiliSecHours(d){
+//Function that converts passed in number of seconds to HH:MM:SS format for ease of reading
+function convertSecHours(d){
   d = Number(d);
 
   var h = Math.floor(d / 3600);
@@ -83,18 +100,5 @@ function convertMiliSecHours(d){
   return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
 }
 
-// function display(urlArray){
-//   var html='<ol>';
-//   for (var i=0; i<=10; i++) {
-//       console.log(urlArray[i]);
-//       html+='<li>'+urlArray[i]+'</li>';
-//   }
-//   html+='</ol>'
-//   document.getElementById('urlList').innerHTML+= html;
-// }
 
-chrome.storage.onChanged.addListener(function(){
-  // loadDataChart();
-  loadArray();
-});
 
