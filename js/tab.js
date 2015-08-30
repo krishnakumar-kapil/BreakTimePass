@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	// console.log($('.tabLinks .tab-links a'));
+    $('.tab-content #pieChart').siblings().hide();
 
 	//On click of tab links buttons display the appropriate display option.
     $('.tab-links li a').on('click', function(e)  {
