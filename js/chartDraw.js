@@ -24,6 +24,7 @@ function loadArray(){
 
 
       for (var url in result){
+        console.log(url);
         if(url !== expireDateVar){
           //Add to array
           sortable.push([url, result[url]]);

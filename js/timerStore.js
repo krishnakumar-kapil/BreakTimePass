@@ -93,7 +93,9 @@ function checkExpireDate(){
     chrome.storage.local.get(null, function(result){
       var expireDate = result[EXPIRE_DATE];
 
-      var expireDateNew = {EXPIRE_DATE: (new Date()).getDate() + 1};
+      var expireDateNew = {};
+      expireDateNew[EXPIRE_DATE] = (new Date()).getDate() + 1;
+
       console.log(expireDateNew);
       if(expireDate == undefined){
         chrome.storage.local.set(expireDateNew);
@@ -107,9 +109,9 @@ function checkExpireDate(){
       }
     });
     /******* DEBUGGING ********/
-    // chrome.storage.local.get(null, function(result){
-    //   console.log(result);
-    // });
+    chrome.storage.local.get(null, function(result){
+      console.log(result);
+    });
 }
 
 //Function gets called when event activates to save changes and so forth
