@@ -20,7 +20,7 @@ function loadArray(){
     //Final storage array.
     var sortable = [];
     //Retrieve all the data from storage.
-    var storage = chrome.storage.local.get(null, function(result){
+   chrome.storage.local.get(null, function(result){
 
 
       for (var url in result){
@@ -73,7 +73,7 @@ function loadDataChart(urlArray, max){
       var responsiveOptions = [
         ['screen and (min-width: 640px)', {
           chartPadding: 20,
-          labelOffset: 140,
+          labelOffset: 70,
           labelDirection: 'explode',
           labelInterpolationFnc: function(value) {
             return value;
