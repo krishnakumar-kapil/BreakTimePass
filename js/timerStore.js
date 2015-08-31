@@ -1,5 +1,5 @@
 //Constants
-const NOT_INCLUDE_HOST = {"extensions":0, "devtools":0, "newtab":0};
+const NOT_INCLUDE_HOST = {"extensions":0, "devtools":0, "newtab":0,"":0};
 const EXPIRE_DATE = "expireDate";
 
 //Storage variables which are needed in memory.

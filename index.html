@@ -47,8 +47,23 @@
    <main class="mdl-layout__content">
       <section class="mdl-layout__tab-panel is-active" id="pieChartSection">
          <div class="page-content" id = "overallChart">
-            <div class = "ct-chart-pie ct-square" id = "actualChart"></div>
-            <div id = "legendDiv"></div>
+            <div class="mdl-grid">
+
+
+                <div class="mdl-cell mdl-cell--5-col">
+                  <div class="mdl-card mdl-shadow--2dp">
+                    <div class = "ct-chart-pie ct-square" id = "actualChart"></div>
+                  </div>
+                </div>
+                <div class="mdl-cell mdl-cell--3-col">
+                  <div class="mdl-card mdl-shadow--4dp">
+                    <div id = "legendDiv"></div>
+                  </div>
+                </div>
+            </div>
+
+            
+            
          </div>
       </section>
       <section class="mdl-layout__tab-panel" id="historyCountSection">

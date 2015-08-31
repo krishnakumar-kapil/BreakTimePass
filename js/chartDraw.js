@@ -56,7 +56,7 @@ function loadArray(){
 //Load the data in based on ChartistJS Api.
 function loadDataChart(urlArray, max){
   chrome.storage.local.get(null,function(result){
-      var legendValsHTML = "<ul class = \"legendList\">";
+      var legendValsHTML = "<ul type = \"square\"class = \"legendList\">";
       var keys = [];
       var vals = [];
       var stringStartClassAttr = "a".charCodeAt(0);
@@ -80,21 +80,16 @@ function loadDataChart(urlArray, max){
       };
 
       var options = {
-        labelInterpolationFnc: function(value) {
-          return value[0];
-        }
+        showLabel: false
       };
 
       var responsiveOptions = [
         ['screen and (min-width: 640px)', {
           chartPadding: 0
-          ,
-          labelOffset: 10,
-          labelDirection: 'explode'
-          ,
-          labelInterpolationFnc: function(value) {
-            return value;
-          }
+          // ,
+          // labelOffset: 10,
+          // labelDirection: 'explode'
+          // ,
         }]
       ];
 

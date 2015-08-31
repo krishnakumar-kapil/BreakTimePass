@@ -1,5 +1,5 @@
 html body{
-	min-width: 50em;
+	min-width: 70em;
 	min-height: 50em;
 }
 
@@ -9,19 +9,26 @@ html body{
 }
 
 .ct-chart-pie.ct-square{
-    height: 60%;
-    width: 60%;
+
+    height: 100%;
+    width: 100%;
 }
 
 .ct-chart-pie{
-    margin: 1em 1em 1em 1em;
+    padding: .25em .25em .25em .25em ;
     height: 100%;
     width: 100%;
     position: relative;
 }
 
 #overallChart{
-    margin-left: 5em;
+    /*margin: 2em 2em 2em 2em;*/
+}
+
+.mdl-card{
+/*    margin: 1em 1em 1em 1em;*/
+    min-height: 10em;
+    min-width: 10em;
 }
 
 .mdl-layout__header .appHeader {
@@ -33,6 +40,9 @@ html body{
     color: rgba(66,66,66,.8);
 }
 
+.legendList li{
+    list-style-image: url("Assets/square.png");
+}
 
 
 
