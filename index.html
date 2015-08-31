@@ -3,15 +3,23 @@
   <head>
     <title>URL's</title>
     <!-- <script src='timerStore.js'></script> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.9.2/chartist.min.css">
+    <link rel="stylesheet" href="node_modules/chartist/dist/chartist.min.css">
     <link rel="stylesheet" href="css/main.css">
-
+    <link rel="stylesheet" href="css/pie.css">
+  
      <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
   
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
      <script src="node_modules/chartist/dist/chartist.min.js"></script>
+
+     <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
+     <script src="/node_modules/material-design-lite/material.min.js"></script>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+     <!-- STYLE -->
+     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue-yellow.min.css" />
 
      <script src="js/chartDraw.js"></script>
      <script src="js/tab.js"></script>
@@ -21,32 +29,42 @@
   </head>
 
   <body>
-    <h1>History Data Statistics</h2>
 
-    <div class="tabLinks">
-      <ul class="tab-links">
-          <li class="active"><a id = "pieButton" href="#pieChart">Pie Chart</a></li>
-          <li><a id = "historyButton" href="#historyCountDiv">History Count</a></li>
-          <li><a id = "timingButton"href="#timingData">Timing Data</a></li>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+   <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row appHeader">
+         <!-- Title -->
+          <h1>BreakTimePass</h1>
+      </div>
+      <!-- Tabs -->      
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+           <a href="#pieChartSection" class="mdl-layout__tab is-active">Pie Chart</a>
+           <a href="#historyCountSection" class="mdl-layout__tab">History Count</a>
+           <a href="#timingDataSection" class="mdl-layout__tab">Timing Data</a>
+        </div>
+   </header>
+
+   <main class="mdl-layout__content">
+      <section class="mdl-layout__tab-panel is-active" id="pieChartSection">
+         <div class="page-content" id = "overallChart">
+            <div class = "ct-chart ct-square" id = "actualChart"></div>
+         </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="historyCountSection">
+         <div class="page-content" id = "historyCount">
+            <!-- Your content goes here -->
+         </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="timingDataSection">
+         <div class="page-content" id = "urlList">
+            <!-- Your content goes here -->
+         </div>
+      </section>
+   </main>
+</div>
 
 
-      </ul>
-    </div>
-      <div class="tab-content">
-          <div id="historyCountDiv" class="">
-             <h2> History Count </h2>
-              <div id = "historyCount"></div>
-          </div>
 
-          <div id="pieChart" class="">
-             <h2>Pie Chart of Data </h2>
-            <div class = "ct-chart ct-golden-section ct-square"></div>
-          </div>
 
-          <div id="timingData" class="">
-            <h2>Timing Data </h2>
-            <div id = "urlList"></div>
-          </div>
-    </div>
   </body>
 </html>

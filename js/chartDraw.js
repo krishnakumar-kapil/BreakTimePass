@@ -20,7 +20,7 @@ function loadArray(){
     //Final storage array.
     var sortable = [];
     //Retrieve all the data from storage.
-    var storage = chrome.storage.local.get(null, function(result){
+   chrome.storage.local.get(null, function(result){
 
 
       for (var url in result){
@@ -30,6 +30,11 @@ function loadArray(){
           sortable.push([url, result[url]]);
         }
       }
+      var max = displayCount < sortable.length? displayCount: sortable.length;
+
+      //Load chart based on data
+      loadDataChart(sortable, max);
+
       //Sort function based on time in each.
       sortable.sort(function(a, b) {return b[1] - a[1]});
 
@@ -37,15 +42,14 @@ function loadArray(){
 
       //Print to html.
       var html='<ol>';
-      var max = displayCount < sortable.length? displayCount: sortable.length;
+      
       for (var i=0; i< max; i++) {
           html+='<li>'+(sortable[i])[0]+ ": "+convertSecHours((sortable[i])[1])+'</li>';
       }
       html+='</ol>'
       //Add to urlList
       document.getElementById('urlList').innerHTML+= html;
-      //Load chart based on data
-      loadDataChart(sortable, max);
+      
     });
 }
 
@@ -72,9 +76,11 @@ function loadDataChart(urlArray, max){
 
       var responsiveOptions = [
         ['screen and (min-width: 640px)', {
-          chartPadding: 20,
-          labelOffset: 140,
-          labelDirection: 'explode',
+          chartPadding: 20
+          ,
+          labelOffset: 70,
+          labelDirection: 'explode'
+          ,
           labelInterpolationFnc: function(value) {
             return value;
           }
@@ -84,7 +90,7 @@ function loadDataChart(urlArray, max){
       console.log(data);
       console.log(options);
       console.log(responsiveOptions);
-      new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
+      new Chartist.Pie('#actualChart', data, options, responsiveOptions);
 
     });
 

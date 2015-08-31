@@ -1,0 +1,54 @@
+
+.ct-series-a .ct-slice-pie {
+  /*  */
+  /* GREEN */
+  fill: #4CAF50;
+}
+
+.ct-series-b .ct-slice-pie {
+  /*  */
+  /* Lime */
+  fill: #CDDC39;
+}
+
+.ct-series-c .ct-slice-pie {
+  /* TEAL */
+  fill: #009688;
+}
+
+
+.ct-series-d .ct-slice-pie {
+  /* light green */
+  fill: #FFC107;
+}
+
+.ct-series-e .ct-slice-pie {
+  /* yellow*/
+  fill: #FFEB3B;
+}
+
+
+.ct-series-f .ct-slice-pie {
+  /* dark green */
+  fill: #1B5E20;
+}
+
+.ct-series-g .ct-slice-pie {
+  /* light lime */
+  fill: #DCE775;
+}
+
+.ct-series-h .ct-slice-pie {
+  /*  */
+  fill: #CDDC39;
+}
+
+.ct-series-i .ct-slice-pie {
+  /*  */
+  fill: #4CAF50;
+}
+
+.ct-series-j .ct-slice-pie {
+  /*  */
+  fill: #CDDC39;
+}
