@@ -8,12 +8,12 @@ html body{
 	font-size: 1.25em;
 }
 
-.ct-chart.ct-square{
-    height: 70%;
-    width: 70%;
+.ct-chart-pie.ct-square{
+    height: 60%;
+    width: 60%;
 }
 
-.ct-chart{
+.ct-chart-pie{
     margin: 1em 1em 1em 1em;
     height: 100%;
     width: 100%;
