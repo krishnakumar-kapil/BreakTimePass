@@ -30,6 +30,11 @@ function loadArray(){
           sortable.push([url, result[url]]);
         }
       }
+      var max = displayCount < sortable.length? displayCount: sortable.length;
+      
+      //Load chart based on data
+      loadDataChart(sortable, max);
+
       //Sort function based on time in each.
       sortable.sort(function(a, b) {return b[1] - a[1]});
 
@@ -37,15 +42,14 @@ function loadArray(){
 
       //Print to html.
       var html='<ol>';
-      var max = displayCount < sortable.length? displayCount: sortable.length;
+      
       for (var i=0; i< max; i++) {
           html+='<li>'+(sortable[i])[0]+ ": "+convertSecHours((sortable[i])[1])+'</li>';
       }
       html+='</ol>'
       //Add to urlList
       document.getElementById('urlList').innerHTML+= html;
-      //Load chart based on data
-      loadDataChart(sortable, max);
+      
     });
 }
 

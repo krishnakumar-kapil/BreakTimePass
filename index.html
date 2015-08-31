@@ -5,6 +5,7 @@
     <!-- <script src='timerStore.js'></script> -->
     <link rel="stylesheet" href="node_modules/chartist/dist/chartist.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pie.css">
   
      <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
   
@@ -18,7 +19,7 @@
      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
      <!-- STYLE -->
-     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.orange-yellow.min.css" />
+     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue-green.min.css" />
 
      <script src="js/chartDraw.js"></script>
      <script src="js/tab.js"></script>
@@ -28,33 +29,6 @@
   </head>
 
   <body>
-<!--     <h1>History Data Statistics</h2> -->
-
-<!--     <div class="tabLinks">
-      <ul class="tab-links">
-          <li class="active"><a id = "pieButton" href="#pieChart">Pie Chart</a></li>
-          <li><a id = "historyButton" href="#historyCountDiv">History Count</a></li>
-          <li><a id = "timingButton"href="#timingData">Timing Data</a></li>
-
-
-      </ul>
-    </div>
-      <div class="tab-content">
-          <div id="historyCountDiv" class="">
-             <h2> History Count </h2>
-              <div id = "historyCount"></div>
-          </div>
-
-          <div id="pieChart" class="">
-             <h2>Pie Chart of Data </h2>
-            <div class = "ct-chart ct-golden-section ct-square"></div>
-          </div>
-
-          <div id="timingData" class="">
-            <h2>Timing Data </h2>
-            <div id = "urlList"></div>
-          </div>
-    </div> -->
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
    <header class="mdl-layout__header">
@@ -62,18 +36,18 @@
          <!-- Title -->
           <h1>BreakTimePass</h1>
       </div>
-      <!-- Tabs -->
-      <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-         <a href="#pieChartSection" class="mdl-layout__tab is-active">Pie Chart</a>
-         <a href="#historyCountSection" class="mdl-layout__tab">History Count</a>
-         <a href="#timingDataSection" class="mdl-layout__tab">Timing Data</a>
-      </div>
+      <!-- Tabs -->      
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+           <a href="#pieChartSection" class="mdl-layout__tab is-active">Pie Chart</a>
+           <a href="#historyCountSection" class="mdl-layout__tab">History Count</a>
+           <a href="#timingDataSection" class="mdl-layout__tab">Timing Data</a>
+        </div>
    </header>
 
    <main class="mdl-layout__content">
       <section class="mdl-layout__tab-panel is-active" id="pieChartSection">
          <div class="page-content" id = "overallChart">
-            <div class = "ct-chart ct-square"></div>
+            <div class = "ct-chart"></div>
          </div>
       </section>
       <section class="mdl-layout__tab-panel" id="historyCountSection">

@@ -9,14 +9,23 @@ html body{
 }
 
 .ct-chart{
-    height: 80%;
-    width: 80%;
+    margin: 1em 1em 1em 1em;
+    height: 70%;
+    width: 70%;
 }
 
 #overallChart{
     margin-left: 5em;
 }
 
-.appHeader {
-    margin: 5em 5em 5em 5em;
+.mdl-layout__header .appHeader {
+    margin: 3em 3em 3em 3em;
 }
+
+.mdl-layout-tab {
+    color: rgba(66,66,66,.8);
+}
+
+
+
+
