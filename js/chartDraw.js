@@ -31,7 +31,7 @@ function loadArray(){
         }
       }
       var max = displayCount < sortable.length? displayCount: sortable.length;
-      
+
       //Load chart based on data
       loadDataChart(sortable, max);
 
@@ -76,9 +76,11 @@ function loadDataChart(urlArray, max){
 
       var responsiveOptions = [
         ['screen and (min-width: 640px)', {
-          chartPadding: 20,
+          chartPadding: 20
+          ,
           labelOffset: 70,
-          labelDirection: 'explode',
+          labelDirection: 'explode'
+          ,
           labelInterpolationFnc: function(value) {
             return value;
           }
@@ -88,7 +90,7 @@ function loadDataChart(urlArray, max){
       console.log(data);
       console.log(options);
       console.log(responsiveOptions);
-      new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
+      new Chartist.Pie('#actualChart', data, options, responsiveOptions);
 
     });
 

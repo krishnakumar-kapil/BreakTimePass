@@ -8,10 +8,16 @@ html body{
 	font-size: 1.25em;
 }
 
-.ct-chart{
-    margin: 1em 1em 1em 1em;
+.ct-chart.ct-square{
     height: 70%;
     width: 70%;
+}
+
+.ct-chart{
+    margin: 1em 1em 1em 1em;
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
 
 #overallChart{
@@ -19,7 +25,8 @@ html body{
 }
 
 .mdl-layout__header .appHeader {
-    margin: 3em 3em 3em 3em;
+    margin: 3em 3em 3em 5em;
+    padding: 0em 0em 0em 0em;
 }
 
 .mdl-layout-tab {
