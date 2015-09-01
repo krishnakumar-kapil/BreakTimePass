@@ -4,18 +4,18 @@ html body{
 }
 
 .ct-label{
-	line-height: 3;
+	/*line-height: 3;*/
 	font-size: 1.25em;
 }
 
 .ct-chart-pie.ct-square{
 
-    height: 100%;
-    width: 100%;
+    height: 80%;
+    width: 80%;
 }
 
 .ct-chart-pie{
-    padding: .25em .25em .25em .25em ;
+    margin: .5em .5em .5em .5em ;
     height: 100%;
     width: 100%;
     position: relative;
@@ -25,10 +25,15 @@ html body{
     /*margin: 2em 2em 2em 2em;*/
 }
 
+.mdl-grid .mdl-cell{
+    margin: .5em .5em .5em .5em ;
+}
+
 .mdl-card{
 /*    margin: 1em 1em 1em 1em;*/
-    min-height: 10em;
-    min-width: 10em;
+    min-height: 100%;
+    min-width: 100%;
+
 }
 
 .mdl-layout__header .appHeader {
@@ -40,8 +45,16 @@ html body{
     color: rgba(66,66,66,.8);
 }
 
-.legendList li{
+li legend{
     list-style-image: url("Assets/square.png");
+}
+
+#legendCard {
+    background-color: #01579B;
+}
+
+#accentCard {
+    background-color: #FFEB3B;
 }
 
 

@@ -72,15 +72,18 @@ function loadDataChart(urlArray, max){
       }
       // console.log("legend");
       legendValsHTML += "</ul>";
-      console.log(legendValsHTML);
 
       var data = {
         labels: keys,
         series: vals
       };
 
+      var sum = function(a, b) { return a + b };
+      var total = data.series.reduce(sum);
       var options = {
-        showLabel: false
+        labelInterpolationFnc: function(value) {
+            return Math.round(result[value] / total * 100) + '%';
+          }
       };
 
       var responsiveOptions = [

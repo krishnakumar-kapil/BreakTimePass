@@ -1,7 +1,7 @@
 {
-  "name": "Typed URL History",
+  "name": "BreakTimePass",
   "version": "1.0",
-  "description": "Reads your history, and shows various statistics for your history for the day.",
+  "description": "Keeps track of how long you spend on websites like facebook,etc. and shows the number of times you visit one!",
   "permissions": [
     "history", "storage","tabs"
   ],
@@ -10,6 +10,9 @@
     "scripts": ["js/timerStore.js"],
     "persistent": false
   },
+  "icons": {
+           "48": "Assets/logo48.png",
+          "128": "Assets/logo128.png" },
   "browser_action": {
     "default_popup": "index.html"
   },
