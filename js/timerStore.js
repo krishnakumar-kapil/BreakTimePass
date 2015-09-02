@@ -94,7 +94,9 @@ function checkExpireDate(){
       var expireDate = result[EXPIRE_DATE];
 
       var expireDateNew = {};
-      expireDateNew[EXPIRE_DATE] = (new Date()).getDate() + 1;
+      var tomorrow = new Date();
+      tomorrow.setDate((new Date()).getDate()+1);
+      expireDateNew[EXPIRE_DATE] = tomorrow.getDate();
 
       console.log(expireDateNew);
       if(expireDate == undefined){

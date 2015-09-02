@@ -1,6 +1,6 @@
 {
   "name": "BreakTimePass",
-  "version": "1.0",
+  "version": "1.0.2",
   "description": "Keeps track of how long you spend on websites like facebook,etc. and shows the number of times you visit one!",
   "permissions": [
     "history", "storage","tabs"
