@@ -1,5 +1,5 @@
 html body{
-	min-width: 70em;
+	min-width: 50em;
 	min-height: 50em;
 }
 
@@ -47,6 +47,15 @@ html body{
 
 li legend{
     list-style-image: url("Assets/square.png");
+}
+
+.mdl-card__title-text{
+    text-align: center;
+    color: white;
+}
+
+.mdl-card__title #legendTitle{
+    color: white;
 }
 
 #legendCard {
