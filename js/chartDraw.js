@@ -56,7 +56,7 @@ function loadArray(){
 //Load the data in based on ChartistJS Api.
 function loadDataChart(urlArray, max){
   chrome.storage.local.get(null,function(result){
-      var legendValsHTML = "<ul type = \"square\"class = \"legendList\">";
+      var legendValsHTML = "<ul type = \"none\"class = \"legendList\">";
       var keys = [];
       var vals = [];
       var stringStartClassAttr = "a".charCodeAt(0);
@@ -66,7 +66,8 @@ function loadDataChart(urlArray, max){
 
 
         var classVal = String.fromCharCode(stringStartClassAttr);
-        legendValsHTML += "<li class = \"ct-series-"+classVal+" legend\">"+urlArray[i][0] +"</li>"
+        legendValsHTML += "<li>"+
+              "<i class=\"fa fa-square ct-series-"+classVal+" legend\"></i> "+urlArray[i][0] +"</li>"
         // legendVals.push(legendVal);
         stringStartClassAttr++;
       }

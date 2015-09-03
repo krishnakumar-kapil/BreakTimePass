@@ -1,4 +1,4 @@
-.ct-series-a .ct-slice-pie, li.ct-series-a {
+.ct-series-a .ct-slice-pie, i.ct-series-a {
   /*  */
   /* GREEN */
  fill: #4CAF50; 
@@ -6,58 +6,58 @@
 
 }
 
-.ct-series-b .ct-slice-pie , li.ct-series-b{
+.ct-series-b .ct-slice-pie , i.ct-series-b{
   /*  */
   /* Lime */
   fill: #CDDC39;
 color: #CDDC39;
 }
 
-.ct-series-c .ct-slice-pie , li.ct-series-c{
+.ct-series-c .ct-slice-pie , i.ct-series-c{
   /* TEAL */
   fill: #009688;
 color: #009688;
 }
 
 
-.ct-series-d .ct-slice-pie , li.ct-series-d{
+.ct-series-d .ct-slice-pie , i.ct-series-d{
   /* light green */
   fill: #FFC107;
 color: #FFC107;
 }
 
-.ct-series-e .ct-slice-pie , li.ct-series-e{
+.ct-series-e .ct-slice-pie , i.ct-series-e{
   /* yellow*/
   fill: #FFEB3B;
 color: #FFEB3B;
 }
 
 
-.ct-series-f .ct-slice-pie , li.ct-series-f{
+.ct-series-f .ct-slice-pie , i.ct-series-f{
   /* dark green */
   fill: #B39DDB;
 color: #B39DDB;
 }
 
-.ct-series-g .ct-slice-pie , li.ct-series-g{
+.ct-series-g .ct-slice-pie , i.ct-series-g{
   /* light lime */
   fill: #DCE775;
 color: #DCE775;
 }
 
-.ct-series-h .ct-slice-pie , li.ct-series-h{
+.ct-series-h .ct-slice-pie , i.ct-series-h{
   /*  */
   fill: #CDDC39;
 color: #CDDC39;
 }
 
-.ct-series-i .ct-slice-pie , li.ct-series-i{
+.ct-series-i .ct-slice-pie , i.ct-series-i{
   /*  */
   fill: #4CAF50;
 color: #4CAF50;
 }
 
-.ct-series-j .ct-slice-pie , li.ct-series-j{
+.ct-series-j .ct-slice-pie , i.ct-series-j{
   /*  */
   fill: #CDDC39;
 color: #CDDC39;
