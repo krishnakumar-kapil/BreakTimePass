@@ -95,14 +95,13 @@ function checkExpireDate(){
 
       var expireDateNew = {};
       var tomorrow = new Date();
-      tomorrow.setDate((new Date()).getDate()+1);
-      expireDateNew[EXPIRE_DATE] = tomorrow.getDate();
+      expireDateNew[EXPIRE_DATE] = tomorrow;
 
       console.log(expireDateNew);
       if(expireDate == undefined){
         chrome.storage.local.set(expireDateNew);
       } else {
-        if(expireDate == (new Date()).getDate()){
+        if(expireDate > (new Date())){
           //currently expired thus clear storage.
           console.log("*************CLEARING STORAGE*********");
           chrome.storage.local.clear();
